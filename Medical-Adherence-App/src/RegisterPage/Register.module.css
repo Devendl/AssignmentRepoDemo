@@ -1,0 +1,147 @@
+html {
+
+    height: 100%;
+  }
+  
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    background-color: rgb(255, 255, 255);
+    overflow:auto;
+  }
+  .myDiv {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    
+    border:1px solid rgba(0, 0, 0, 0.199);
+    background-color: rgb(255, 255, 255);   
+    width: 25rem;
+    margin: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom:1.5rem;
+    min-height: 25rem;
+    height: auto;
+    box-sizing: border-box;
+  }
+  
+  h1{
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+    font-family:  Roboto;
+    font-size: 25px;
+    color: rgb(0, 0, 0);
+  }
+  
+  .inputsContainer{
+    width: 22em;
+    min-height: 11em;
+  }
+  
+  .inputP {
+    width: 22em;
+    height: 4.3em;
+  }
+  .inputE,.inputN{
+    width: 22em;
+    height: 4.3em;
+    margin-bottom:2em;
+  }
+  
+  label{
+    color:rgba(51, 50, 50, 0.705);
+    font-size:.8em;
+    font-family: Roboto;
+    font-weight: 600;
+  }
+  
+  input{
+    margin-top:.5em;
+    width: 21.65rem;
+    height: 3em;
+    background-color: rgb(244, 246, 248);
+    border-radius: 4px;
+    border: 1px solid rgba(77, 73, 73, 0.199);
+  }
+  
+  .PreqDiv{
+    width: 22rem;
+  }
+
+  .TermsP{
+    margin-top: 1em;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom: 2em;
+    font-size:.85em;
+    font-family: Roboto;
+    font-weight: 550;
+    text-align: center;
+    color:rgba(34, 34, 34, 0.849);
+  }
+  
+  .buttonsdiv{
+    width: 22rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .CreateAccount{
+    min-width: 21.8rem;
+    border-radius: 5px;
+    background-color: rgb(0, 191, 255); 
+    font-size: .95em;
+    border: none;
+    min-height: 3em;
+    font-family: Roboto;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .SignIndiv{
+    width: 22rem;
+    padding: none;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+  }
+  .Normal{
+    margin-top: .3em;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom: .2em;
+    font-size:.8em;
+    font-family: Roboto;
+    font-weight: 500;
+  }
+  
+  .SignIn{
+    min-width: 2rem;
+    font-size:.8em;
+    border: none;
+    background: none;
+    color: rgb(0, 191, 255); ;
+    font-family: Roboto;
+    cursor: pointer;
+  }
+  .underline{
+    text-decoration: underline;
+  }
+  
+  .ErrorM{
+    font-size:.8em;
+    font-family: Roboto;
+    font-weight: 550;
+    text-align: center;
+    padding: 1em;
+    color:rgba(0, 0, 0, 0.849);
+    background-color: rgba(255, 0, 0, 0.39);
+  }
+  
+  
