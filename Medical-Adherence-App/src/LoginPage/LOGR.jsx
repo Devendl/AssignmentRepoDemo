@@ -1,26 +1,34 @@
 import styles from './LOGR.module.css';
 import { useNavigate } from "react-router-dom";
-import {useState} from "react";
+import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 function LOGR(){
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [error, setError] = useState("")
     const navigate = useNavigate()
+    const [searchParams] = useSearchParams();
+    var message = searchParams.get('message');
     const SignIn = (e) => {
         e.preventDefault()
         axios.post('http://localhost:3000/SignIn', {email, password})
         .then(result => {
-            console.log(result)
-            if(result.data === "Success"){
-                navigate('/dashboard')
-            }else{
+            if(result.data === "Fail"){
                 setError("Invalid email or password. Please try again.")
+            }else{
+                localStorage.setItem('token',result.data.token);
+                navigate('/dashboard')
             }
         })
         .catch(err=> console.log(err))
     }
+    useEffect(() => {
+        if (message) {
+          setError("Session expired please sign back in");
+        }
+      }, [searchParams]);
 
     return(
         <div className={styles.myDiv}>
