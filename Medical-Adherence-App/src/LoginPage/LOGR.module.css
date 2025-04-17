@@ -29,7 +29,7 @@ html {
     box-sizing: border-box;
   }
   
-  h1{
+  .header{
     margin-top: 1.5rem;
     margin-bottom: 2rem;
     box-sizing: border-box;

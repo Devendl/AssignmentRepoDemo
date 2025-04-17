@@ -1,0 +1,629 @@
+html {
+
+    height: 100%;
+    width: 100%;
+  }
+  
+  body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(250, 250, 250);
+    overflow:auto;
+  }
+  .container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    overflow: auto;
+    align-items: stretch;
+  }
+  .MainDiv {
+    flex: 1;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.979);   
+    min-width: 72.8rem;
+    padding-left: 2rem;
+    padding-right: .5rem;
+    padding-bottom:1.5rem;
+    padding-top: 1rem;
+    min-height: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+  }
+
+  .titleDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+  }
+  .title{
+    color:rgba(0, 38, 255, 0.575);
+    font-size: 1.35rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700; 
+  }
+ 
+  .logo{
+    width: 2.5rem; 
+    height: 2.7rem;
+    margin-right:.5rem;
+  }
+
+  .welcomeDiv{
+    margin-top: 3rem;
+    height: 3.5rem;
+  }
+
+  .user{
+    font-family:  Roboto;
+    font-size: 1.6rem;
+    color: rgb(0, 0, 0);
+    font-weight: 650;
+    margin: 0;
+  }
+
+  .created{
+    margin-top:.5rem;
+    font-size:.8rem;
+    font-family:  Roboto;
+    font-weight: 550;
+    color:  rgba(100, 100, 100, 0.726);
+  }
+
+  .logH{
+    margin-top: 3.5rem;
+    font-family:  Roboto;
+    font-size: 1.3rem;
+  }
+
+  .logDiv{
+    display: flex;
+    flex-direction: row;
+    width:72.8rem;
+    margin-top: 1rem;
+    height: 14rem;
+    box-sizing: border-box;
+  }
+
+  .infoBox{
+    height: 100%;
+    background-color:rgba(0, 38, 255, 0.575);
+    width: 22.76rem;
+    border-radius: .8rem;
+    margin-right: 1.5rem;
+    box-sizing: border-box;
+    padding: 1.5rem;
+    justify-content: space-between;
+  }
+
+  .help{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 3rem;
+  }
+
+  .infoH{
+    font-family:  Roboto;
+    font-size: 1.2rem;
+    color: rgb(255, 255, 255);
+    font-weight: 550;
+    margin:0;
+    width: 15rem;
+  }
+
+  .i{
+    margin-left: auto;
+    margin-right: 0;
+    height: 1.7rem;
+    width: 1.7rem;
+    border-radius: 15px;
+    border:none; 
+    color: white;
+    background-color: rgba(143, 158, 245, 0.938);    
+    font-family:  Roboto;
+    font-size: 1.2rem;
+    font-weight: 550;
+  }
+
+  .infoP{
+    font-family:  Roboto;
+    font-size: .9rem;
+    color: rgba(204, 202, 202, 0.952);
+    font-weight: 350;
+    margin-top: .8rem;
+    width: 15rem;
+    line-height: 1.2rem;
+  }
+
+  .infoL{
+    font-family:  Roboto;
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    font-weight: 550;
+    margin-top:1.5rem;
+    background:none;
+    border: none;
+  }
+
+  .logBt{
+    font-family:  Roboto;
+    font-size: 1rem;
+    color:rgba(0, 38, 255, 0.575);
+    font-weight: 550;
+    width: 12rem;
+    padding: .4rem;
+    background-color: white;
+    border: none;
+    border-radius: .65em;
+  }
+  .aDiv{
+    display: flex;
+    flex-direction: column;
+    width: 71.3rem;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 1.2rem;
+    margin-top: 2rem;
+    box-sizing: border-box;
+    border-radius: .8rem;
+  }
+  
+
+  .reportH{
+    font-family:  Roboto;
+    font-size: 1.3rem;
+    height: 1.5rem;
+  }
+  
+  .chartDiv{
+   
+    height: 28rem;
+    padding-left: 5rem;
+    height: 30rem;
+  }
+
+  .sideDiv {
+    background-color: rgba(255, 255, 255, 0.966);   
+    align-items: center;
+    width: 27rem;
+    min-width: 27rem;
+    padding: 2.6rem;
+    padding-top: 1rem;
+    min-height: 100%;
+    height: 69.7rem;
+    box-sizing: border-box;
+    margin-left: auto;
+  }
+
+  .topBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 2.5rem;
+   
+  }
+  .imageButtonE{ 
+    margin-right: .25rem;
+    background-color: rgba(197, 196, 196, 0.548);
+    height: 100%;
+    width: 2.5rem;
+    border-radius: .7em;
+    border: none;
+   
+  }
+
+  .imageButtonE img{
+    transform: scale(2);
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* keeps image from stretching */
+  }
+
+  .imageButton{ 
+    margin-left: .25rem;
+    background-color: rgba(197, 196, 196, 0.548);
+    height: 100%;
+    width: 2.5rem;
+    border-radius: .7em;
+    border: none;
+  }
+
+  .imageButton img{
+    transform: scale(.8);
+    width: 100%;
+    height: 100%;
+   object-fit: contain; /* keeps image from stretching */
+  }
+
+  .barButton{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 100%;
+    margin-left: .25rem;
+    margin-right: .25rem;
+    width: 6.75rem ;
+    font-family: Roboto;
+    font-size: .8rem;
+    font-weight: 550;
+    color: white;
+    border-radius: .65em; 
+    background-color:  rgba(0, 38, 255, 0.575);
+    border: none;
+    padding: 1em;
+  }
+
+  .imageButton2{
+    height: 100%;
+    width: 1.8rem;
+    border-radius: .7em;
+    border: none;
+    background: none;
+    background:none;
+  }
+  .imageButton2 img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* keeps image from stretching */
+  }
+  
+
+  .sideLabelDiv{
+    margin-top: 3.2rem;
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+  .sideH{
+    font-family:  Roboto;
+    font-size: 1.3rem;
+    color: rgb(0, 0, 0);
+    margin:0;
+    font-weight: 650;
+  }
+
+  .seeAll{
+    height: 100%;
+    font-size:.8em;
+    font-family:  Roboto;
+    font-weight: 550;
+    border: none;
+    background: none;
+    color:  rgba(100, 100, 100, 0.726);
+    cursor: pointer;
+    text-align: center;
+    margin: 0;
+    width: 4rem;
+  }
+
+  .dDiv{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    align-items: center;
+  }
+
+  .sideNotiDiv{
+    display: flex;
+    flex-direction: row;
+    background-color: white;   
+    margin-bottom: .75rem;
+    width: 100%;
+    height: 4.5rem;
+    border-radius: .65em; 
+    box-sizing: border-box;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .imgBD{ 
+    background-color: rgba(224, 224, 224, 0.342);
+    height: 2.8rem;
+    width: 2.8rem;
+    border-radius: 2em;
+    border: none;
+    margin-right: 1rem;
+  }
+
+  .imgB{
+    transform: scale(.5);
+    width: 100%;
+    height: 100%;
+   object-fit: contain; /* keeps image from stretching */
+  }
+
+  .sideNotiInD{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .snh{
+    font-family:  Roboto;
+    font-size: 1.1rem;
+    color: rgb(0, 0, 0);
+    font-weight: 550;
+    height: 1.35rem;
+    margin:0;
+    margin-top: .8rem;
+    margin-bottom: .3rem;
+  }
+
+  .snp{
+    font-family:  Roboto;
+    font-size: .9rem;
+    color: rgba(100, 100, 100, 0.726);
+    font-weight: 450;
+    height: 1.35rem;
+    margin: 0;
+    margin-bottom: .6rem;
+  }
+
+  .snd{
+    font-family:  Roboto;
+    font-size: 1rem;
+    color: rgb(0, 0, 0);
+    font-weight: 550;
+    margin:0;
+  }
+
+  .imgs{
+    margin-top: 2rem;
+    height: 10rem;
+    width: 10rem;
+  }
+
+
+  .greyOut{
+    position: fixed;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .mTab{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    
+    border:1px solid rgba(0, 0, 0, 0.199);
+    background-color: rgb(255, 255, 255);   
+    width: 30rem;
+    margin: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom:1rem;
+    padding-top:1rem;
+    height: 30rem;
+    box-sizing: border-box;
+
+  }
+
+  .x{
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 15px;
+    border:none;
+    background-color: rgb(255, 255, 255);     
+  }
+
+  .x img{
+    transform: scale(1.2);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .x:hover{
+    background-color: rgba(224, 224, 224, 0.342);
+  }
+
+  .addDiv{
+    display: flex;
+    flex-direction: row;
+    width: 28rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: .5rem;
+  }
+
+  .inputMed{
+    width: 21.05rem;
+    height: 2.5rem;
+    box-sizing: border-box;
+    margin-top: auto;
+    margin-right: 1rem;
+    margin-left: .7rem;
+    border-radius: .65em;
+    border: none;
+  }
+
+  .addB{
+    font-family: Roboto;
+    width: 4.5rem;
+    height: 2.5rem;
+    font-size: .8rem;
+    font-weight: 550;
+    color: white;
+    border-radius: .65em; 
+    margin-right: .75rem;
+    border: none;
+    background-color:  rgba(0, 38, 255, 0.575);
+  }
+
+  .doseInputs{
+    width: 6rem;
+    height: 2.5rem;
+    box-sizing: border-box;
+    margin-top: auto;
+    margin-right: .5rem;
+    margin-left: .7rem;
+    border-radius: .65em;
+    border: none;
+  }
+
+  .doseUnits{
+    width: 2.5rem;
+    height: 2.5rem;
+    box-sizing: border-box;
+    margin-top: auto;
+    margin-right: .5rem;
+    border-radius: .65em;
+    border: none;
+    background-color: #f0f0f0;
+  }
+
+  .slots{
+    display: flex;
+    flex-direction: column;
+    width: 28rem;
+    height: 17rem;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 2rem;
+    overflow-y: auto;
+    overflow-x: none;
+  }
+  
+  .fmDiv{
+    display: flex;
+    flex-direction: row;
+    width: 26.6rem;
+    height: 4rem;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: .5rem;
+    background-color: rgba(250, 246, 246, 0.986); 
+    
+    margin-bottom: .5rem;
+    border-radius: .65em;
+  }
+
+  .x2{
+    margin-left: auto;
+    margin-right: .5rem;
+    height: 2rem;
+    width: 4rem;
+    border-radius: .75em;
+    border:none;
+    background-color: rgba(255, 0, 0, 0.486);     
+    text-align: center;
+    font-family: Roboto;
+    font-size: .8rem;
+    font-weight: 550;
+  }
+
+  .info{
+    font-family: Roboto;
+    margin: 0;
+    margin-left: .5rem;
+    font-size: 1.1rem;
+    font-weight: 550;
+  }
+  .info2{
+    font-family: Roboto;
+    margin: 0;
+    margin-left: .5rem;
+    margin-top: .5rem;
+    font-size: .9rem;
+    font-weight: 550;
+    color: rgba(100, 100, 100, 0.726);
+  }
+
+
+  .noInfo{
+    margin-right: auto;
+    font-family: Roboto;
+    margin-left: .7rem;
+    font-size: 1.1rem;
+    font-weight: 550;
+  }
+
+  .rTab{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    
+    border:1px solid rgba(0, 0, 0, 0.199);
+    background-color: rgb(255, 255, 255);   
+    width: 30rem;
+    margin: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom:1rem;
+    padding-top:1rem;
+    height: 12rem;
+    box-sizing: border-box;
+  }
+
+  .mChoice{
+    width: 8rem;
+    height: 2.5rem;
+    box-sizing: border-box;
+    margin-top: auto;
+    margin-right: .5rem;
+    border-radius: .65em;
+    border: none;
+    background-color: #f0f0f0;
+  }
+
+  .dateIn{
+    width: 10rem;
+    height: 2.5rem;
+    box-sizing: border-box;
+    margin-top: auto;
+    margin-right: .5rem;
+    margin-left: .7rem;
+    border-radius: .65em;
+    border: none;
+  }
+
+  button{
+    cursor: pointer;
+  }
+
+  .inputM{
+    width: 21.05rem;
+    height: 2.5rem;
+    box-sizing: border-box;
+    margin-top: auto;
+    margin-right: 1rem;
+    margin-left: .7rem;
+    border-radius: .65em;
+    border: none;
+    background-color: #f0f0f0;
+  }

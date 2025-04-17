@@ -23,7 +23,7 @@ function Register(){
     }
     return(
         <div className={styles.myDiv}>
-            <h1>Create an Account</h1>
+            < h1 className = {styles.header}>Create an Account</h1>
            
             {error && <p className={styles.ErrorM}>{error}</p>}
         

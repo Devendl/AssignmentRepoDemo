@@ -32,7 +32,7 @@ function LOGR(){
 
     return(
         <div className={styles.myDiv}>
-            <h1>Sign in to MediTrack</h1>
+            <h1 className={styles.header}>Sign in to MediTrack</h1>
             {error && <p className={styles.ErrorM}>{error}</p>}
             <div className="inputsContainer">
                 <div className={styles.inputE}>
