@@ -11,6 +11,7 @@ import xIcon from '../assets/xicon.webp';
 import rIcon from '../assets/rIcon.png';
 import wIcon from '../assets/wIcon.png';
 import sIcon from '../assets/sIcon.png';
+import cIcon from '../assets/cIcon.png';
 function Dashboard(){
     const [userName, setName] = useState(null);
     const [medicine, setMedicine] = useState(null);
@@ -21,8 +22,12 @@ function Dashboard(){
     const [medicationTab, setmedicationTab] = useState(false);
     const [reminderTab, setreminderTab] = useState(false);
     const [logTab, setlogTab] = useState(false);
+    const [logoutTab, setlogoutTab] = useState(false);
+    const [alertTab, setalertTab] = useState(false);
     const [medications, setMedications] = useState([]);
     const [reminders, setReminders] = useState([]);
+    const [preminders, setPreminders] = useState([]);
+    const [alert, setAlert]= useState(null);
     const navigate = useNavigate()
     const logout = () =>{
         localStorage.removeItem('token');
@@ -31,21 +36,34 @@ function Dashboard(){
     }
     const labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const datasets = medications.map((med) => {
-        const hexColor = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
-      
         return {
           label: med.name,
           data: med.dosesThisWeek,
-          borderColor: hexColor,
-          backgroundColor: hexColor, // match with transparency
+          borderColor: med.color,
+          backgroundColor: med.color, // match with transparency
         };
     });
     
+    function continuous(){
+        const remindcheck=()=>{
+            let lastcheck;
+            const now = new Date();
+            lastcheck = new Date(Date.now() - 60000);
+            for(var i = 0; i<reminders.length;i++){
+                const time = new Date(reminders[i].scheduledTime);
+                if(time>lastcheck && time <=now){
+                    setalertTab(true);
+                    setAlert(reminders[i]);
+                }
+            }
+        }
+        setInterval(remindcheck, 60000);
+    }
+    continuous();
     
 
     const addReminder = () => {
         const dateTime = new Date(dateT);
-        console.log(medicine+dosage);
         axios.post('http://localhost:3000/addReminder', {rName,medicine, dateTime},{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -74,7 +92,6 @@ function Dashboard(){
         .then(result => {
             setlogTab(false);
             checkMeds();
-            console.log(logTab);
         })
         .catch(err=> {
             if (err.status === 401 || err.status === 403) {
@@ -92,7 +109,19 @@ function Dashboard(){
               },
         })
         .then(result => {
-            setReminders(result.data.reminders);
+            let greater=[];
+            let less=[];
+            const today = new Date();
+            for(var i =0; i<result.data.reminders.length;i++){
+                const d = new Date(result.data.reminders[i].scheduledTime);
+                if(d>today){
+                    greater.push(result.data.reminders[i]);
+                }else{
+                    less.push(result.data.reminders[i]);
+                }
+            }
+            setReminders(greater);
+            setPreminders(less);
         })
         .catch(err=> {
             if (err.status === 401 || err.status === 403) {
@@ -106,7 +135,6 @@ function Dashboard(){
 
     const addMeds = () => {
         const send = dosage+units;
-        console.log(medicine+dosage);
         axios.post('http://localhost:3000/addMeds', {medicine, send},{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -114,7 +142,6 @@ function Dashboard(){
         })
         .then(result => {
             checkMeds();
-            console.log(result.data)
         })
         .catch(err=> {
             if (err.status === 401 || err.status === 403) {
@@ -132,7 +159,6 @@ function Dashboard(){
               },
         })
         .then(result => {
-            console.log(result.data.medications)
             setMedications(result.data.medications);
         })
         .catch(err=> {
@@ -154,7 +180,6 @@ function Dashboard(){
               },
         })
         .then(result => {
-            console.log(result.data.name)
             setName(result.data.name)
         })
         .catch(err=> {
@@ -208,7 +233,7 @@ function Dashboard(){
                                 <button className={styles.i}>i</button>
                             </div>
                             <p className={styles.infoP}>Help patients follow healthplans and track behavioral changes. <br></br>Can help explain symptoms </p>
-                            <button className={styles.infoL}>Learn more  →</button>
+                            <a className={styles.infoL} href="https://conductscience.com/digital-health/medication-log/#:~:text=In%20fact%2C%20medication%20adherence%20monitoring,of%20control%20over%20their%20condition.">Learn more  →</a>
                         </div>
                         <div className={styles.infoBox}>
                              <div className={styles.help}>
@@ -216,7 +241,7 @@ function Dashboard(){
                                 <button className={styles.i}>i</button>
                             </div>
                             <p className={styles.infoP}>Help experts understand the patient's journey and resolve any issues <br></br>Info used to provide better treatment </p>
-                            <button className={styles.infoL}>Learn more  →</button>
+                            <a className={styles.infoL} href="https://conductscience.com/digital-health/medication-log/#:~:text=In%20fact%2C%20medication%20adherence%20monitoring,of%20control%20over%20their%20condition.">Learn more  →</a>
                         </div>
                     </div>
                   
@@ -235,7 +260,7 @@ function Dashboard(){
                         <button className={styles.imageButtonE}><img src={noti}/></button>
                         <button className={styles.barButton} onClick={functM}>Medications</button>
                         <button className={styles.barButton}onClick={functR}>Reminders</button>
-                        <button className={styles.imageButton}><img src={account}/></button>
+                        <button className={styles.imageButton} onClick={() =>{setlogoutTab(true)}}><img src={account}/></button>
                         <button className={styles.imageButton2}><img src={dots}/></button>
                     </div>
                     <div className={styles.sideLabelDiv}>
@@ -269,7 +294,7 @@ function Dashboard(){
                                             <img src={rIcon} className={styles.imgB}/>
                                          </div>
                                          <div className={styles.sideNotiInD}>
-                                            <h1 className={styles.snh}>{new Date(rem.scheduledTime).toLocaleString('default', { month: 'long' })} {new Date(rem.scheduledTime).getDay()}, {new Date(rem.scheduledTime).getFullYear()}, {new Date(rem.scheduledTime).toLocaleTimeString([], {hour: '2-digit',minute: '2-digit'})}</h1>
+                                            <h1 className={styles.snh}>{new Date(rem.scheduledTime).toLocaleString('default', { month: 'long' })} {new Date(rem.scheduledTime).getDate()}, {new Date(rem.scheduledTime).getFullYear()}, {new Date(rem.scheduledTime).toLocaleTimeString([], {hour: '2-digit',minute: '2-digit'})}</h1>
                                             <p className={styles.snp}>{rem.name}: {rem.medicine}</p>
                                         </div>
                                          
@@ -287,8 +312,25 @@ function Dashboard(){
                         <button className={styles.seeAll}>Clear All</button>
                     </div>
                     <div className={styles.dDiv}>
-                        <img src={sIcon} className={styles.imgs}/>
-                        <h1 className={styles.snd}>No past reminders found</h1>
+                        {preminders.length > 0 ? (
+                                preminders.slice(0, 3).map((rem, i) => (
+                                    <div className={styles.sideNotiDiv}>
+                                         <div className={styles.imgBD}>
+                                            <img src={rIcon} className={styles.imgB}/>
+                                         </div>
+                                         <div className={styles.sideNotiInD}>
+                                            <h1 className={styles.snh}>{new Date(rem.scheduledTime).toLocaleString('default', { month: 'long' })} {new Date(rem.scheduledTime).getDate()}, {new Date(rem.scheduledTime).getFullYear()}, {new Date(rem.scheduledTime).toLocaleTimeString([], {hour: '2-digit',minute: '2-digit'})}</h1>
+                                            <p className={styles.snp}>{rem.name}: {rem.medicine}</p>
+                                        </div>
+                                         
+                                    </div>
+                                ))
+                            ) : (
+                                <div className={styles.dDiv}>
+                                    <img src={sIcon} className={styles.imgs}/>
+                                    <h1 className={styles.snd}>No upcoming reminders found</h1>
+                                </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -370,6 +412,33 @@ function Dashboard(){
                         <div className={styles.addDiv}>
                             <input type="time" className={styles.doseInputs} onChange={(e)=> setdateT(e.target.value)}/>
                             <input type="number" className={styles.doseInputs} onChange={(e)=> setDosage(e.target.value)} placeholder="Dosage"/>
+                        </div>
+                   </div>
+                </div>
+            )}
+            {logoutTab && (
+                <div className={styles.greyOut}>
+                   <div className={styles.lTab}>
+                        <h1 className={styles.LH}>Log out</h1>
+                        <p className={styles.LP}>Are you sure you want to log out?</p>
+                        
+                        <div className={styles.addLDiv}>
+                            <button className={styles.LB} onClick={logout}>Logout</button>
+                            <button className={styles.LB2} onClick={() =>{setlogoutTab(false)}}>Cancel</button>
+                        </div>
+                   </div>
+                </div>
+            )}
+             {alertTab && (
+                <div className={styles.greyOut}>
+                   <div className={styles.aTab}>
+                        <img src={cIcon} className = {styles.clock}></img>
+                        <h1 className={styles.LH}>Reminder</h1>
+                        <p className={styles.LP}>{alert.name}: {alert.medicine}</p>
+                        
+                        <div className={styles.addADiv}>
+                            <button className={styles.AB} onClick={()=>{setalertTab(false); setlogTab(true);}}>Log Medication</button>
+                            <button className={styles.AB2} onClick={() =>{setalertTab(false)}}>Cancel</button>
                         </div>
                    </div>
                 </div>

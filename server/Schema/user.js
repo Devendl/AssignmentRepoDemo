@@ -11,7 +11,11 @@ const userSchema = new mongoose.Schema({
           dosesThisWeek: {
             type: [Number],
             default: [0, 0, 0, 0, 0, 0, 0], // 7 days: Mon–Sun
-          },         
+          },  
+          color: {
+            type:String, 
+            default: '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')
+          }
         }
       ],
     lastReset: { type: Date, default: new Date() },

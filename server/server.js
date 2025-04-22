@@ -121,7 +121,8 @@ app.post('/addMeds', (req,res) =>{
         if(users){
             users.medications.push({
                 name: medicine,
-                dosage: send
+                dosage: send,
+                color: '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')
             })
             users.save()
             .then(() => {
@@ -142,7 +143,26 @@ app.post('/checkMeds', authenticateToken, (req,res) =>{
     
     userModel.findOne({email: req.user.email})
     .then(users => {
+       
         if(users){
+            const inDate = new Date(users.lastReset);
+            
+            const today = new Date();
+            let save = false;
+            users.save();
+            while(inDate<today){
+                inDate.setDate(inDate.getDate()+7);
+                if(inDate<=today){
+                    for(var i= 0;i<users.medications.length;i++){
+                        users.medications[i].dosesThisWeek = [0,0,0,0,0,0,0];
+                    }
+                    users.lastReset = new Date(inDate);
+                    save = true;
+                }
+            }
+            if(save){
+                users.save();
+            }
             res.json({medications: users.medications})
             
         }else{
@@ -179,7 +199,16 @@ app.post('/createA', (req,res) =>{
             res.json("Fail")
         }else{
             userModel.create(req.body)
-            .then(users => res.json("Success"))
+            .then(users => {
+                const today = new Date();
+                const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+                const lastSunday = new Date(today);
+                lastSunday.setDate(today.getDate() - dayOfWeek); // Go back to last Sunday
+                lastSunday.setHours(0, 0, 0, 0);
+                users.lastReset = lastSunday;
+                users.save();
+                res.json("Success")
+            })
             .catch(err => res.json(err))
         }
     })
