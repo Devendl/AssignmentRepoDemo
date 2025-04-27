@@ -5,7 +5,7 @@ import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LOGR from './LoginPage/LOGR.jsx'
 import Register from './RegisterPage/Register.jsx'
-import Dashboard from './Dashboard/dashboard.jsx'
+import Dashboard from './Dashboard/Dashboard.jsx'
 import HomeP from './HomePage/HomeP.jsx'
 
 const router = createBrowserRouter([

@@ -16,7 +16,7 @@ function Dashboard(){
     const [userName, setName] = useState(null);
     const [medicine, setMedicine] = useState(null);
     const [dosage, setDosage] = useState(null);
-    const [units, setUnits] = useState("mL");
+    const [units, setUnits] = useState(null);
     const [rName, setrName] = useState(null);
     const [dateT, setdateT] = useState(null);
     const [medicationTab, setmedicationTab] = useState(false);
@@ -32,7 +32,7 @@ function Dashboard(){
     const logout = () =>{
         localStorage.removeItem('token');
         localStorage.clear();
-        navigate('/');
+        navigate('/login');
     }
     const labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const datasets = medications.map((med) => {
@@ -54,6 +54,7 @@ function Dashboard(){
                 if(time>lastcheck && time <=now){
                     setalertTab(true);
                     setAlert(reminders[i]);
+                    checkReminders();
                 }
             }
         }
@@ -63,23 +64,29 @@ function Dashboard(){
     
 
     const addReminder = () => {
-        const dateTime = new Date(dateT);
-        axios.post('http://localhost:3000/addReminder', {rName,medicine, dateTime},{
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-              },
-        })
-        .then(result => {
-            checkReminders();
-            setreminderTab(false);
-        })
-        .catch(err=> {
-            if (err.status === 401 || err.status === 403) {
-                // Token expired or invalid
-                localStorage.removeItem('token');
-                navigate('/login?message=TokenExpired');
-            }
-        })
+        console.log("got it");
+        if(rName && medicine && dateT){
+            const dateTime = new Date(dateT);
+            axios.post('http://localhost:3000/addReminder', {rName,medicine, dateTime},{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                  },
+            })
+            .then(result => {
+                checkReminders();
+                setMedicine(null);
+                setrName(null);
+                setdateT(null);
+                setreminderTab(false);
+            })
+            .catch(err=> {
+                if (err.status === 401 || err.status === 403) {
+                    // Token expired or invalid
+                    localStorage.removeItem('token');
+                    navigate('/login?message=TokenExpired');
+                }
+            })
+        }
     }
 
     const addLog = () => {
@@ -134,22 +141,28 @@ function Dashboard(){
 
 
     const addMeds = () => {
-        const send = dosage+units;
-        axios.post('http://localhost:3000/addMeds', {medicine, send},{
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-              },
-        })
-        .then(result => {
-            checkMeds();
-        })
-        .catch(err=> {
-            if (err.status === 401 || err.status === 403) {
-                // Token expired or invalid
-                localStorage.removeItem('token');
-                navigate('/login?message=TokenExpired');
-            }
-        })
+        if(medicine&&dosage&&units){
+            const send = dosage+units;
+            axios.post('http://localhost:3000/addMeds', {medicine, send},{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                  },
+            })
+            .then(result => {
+                setMedicine(null);
+                setUnits(null);
+                setDosage(null);
+                checkMeds();
+            })
+            .catch(err=> {
+                if (err.status === 401 || err.status === 403) {
+                    // Token expired or invalid
+                    localStorage.removeItem('token');
+                    navigate('/login?message=TokenExpired');
+                }
+            })
+        }
+        
     }
 
     const checkMeds = () => {
@@ -379,12 +392,12 @@ function Dashboard(){
 
                         <button className={styles.x} onClick={() =>{setreminderTab(false)}}><img src={xIcon} /></button>
                          <div className={styles.addDiv}>
-                            <input type="text" className={styles.inputMed}  onChange={(e)=> setrName(e.target.value)} placeholder="Title"/>
+                            <input type="text" className={styles.inputMed}  onChange={(e)=> setrName(e.target.value)} placeholder="Title" required/>
                             <button className={styles.addB} onClick={addReminder} >Add</button>
                         </div>
                         <div className={styles.addDiv}>
-                            <input type="datetime-local" className={styles.dateIn} onChange={(e)=> setdateT(e.target.value)}/>
-                            <select className={styles.mChoice} onChange={(e)=> setMedicine(e.target.value)}>
+                            <input type="datetime-local" className={styles.dateIn} onChange={(e)=> setdateT(e.target.value)} required/>
+                            <select className={styles.mChoice} onChange={(e)=> setMedicine(e.target.value)} required>
                                 <option > </option>
                                 {medications.map((med, i) => (
                                     <option >{med.name} </option>

@@ -176,9 +176,11 @@ app.post('/SignIn', (req,res) =>{
     const {email, password} = req.body;
     userModel.findOne({email: email})
     .then(users => {
+        console.log("sent")
         if(users){
             if(users.password===password){
                 const token = jwt.sign({email: users.email}, process.env.ACCESS_TOKEN, { expiresIn: '1h' })
+                console.log("sent")
                 res.json({token})
             }else{
                 res.json("Fail")
