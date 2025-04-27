@@ -64,7 +64,6 @@ function Dashboard(){
     
 
     const addReminder = () => {
-        console.log("got it");
         if(rName && medicine && dateT){
             const dateTime = new Date(dateT);
             axios.post('http://localhost:3000/addReminder', {rName,medicine, dateTime},{
@@ -90,23 +89,29 @@ function Dashboard(){
     }
 
     const addLog = () => {
-        const today = new Date();
-        axios.post('http://localhost:3000/addLog', {medicine, dosage,today},{
+        if(medicine && dosage && dateT){
+            const today = new Date();
+            axios.post('http://localhost:3000/addLog', {medicine, dosage,today},{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
               },
-        })
-        .then(result => {
-            setlogTab(false);
-            checkMeds();
-        })
-        .catch(err=> {
-            if (err.status === 401 || err.status === 403) {
+             })
+             .then(result => {
+                setMedicine(null);
+                setDosage(null);
+                setdateT(null);
+                setlogTab(false);
+                checkMeds();
+             })
+            .catch(err=> {
+                if (err.status === 401 || err.status === 403) {
                 // Token expired or invalid
-                localStorage.removeItem('token');
-                navigate('/login?message=TokenExpired');
-            }
-        })
+                    localStorage.removeItem('token');
+                    navigate('/login?message=TokenExpired');
+                }
+            })
+        }
+        
     }
 
     const checkReminders = () => {
